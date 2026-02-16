@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "App includes a \"My Work\" section intended to display embedded/linked YouTube videos (Shorts and standard YouTube link).",
+  "architectural_notes": [],
+  "known_issues": [
+    "\"Failed to load work items\" error in the app causes videos in the \"My Work\" section not to show."
+  ],
+  "isFixRequest": true,
+  "existing_features": [
+    {
+      "id": "feature-fix-the-failed-to-load-work-items-error-so-the-my-work-section-can-display-work-videos-reliably",
+      "title": "Fix the 'Failed to load work items' error so the My Work section can display work videos reliably.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-the-user-provided-youtube-video-links-as-work-items-under-the-my-work-section-title-my-work-and-render-them-as-embedded-videos",
+      "title": "Add the user-provided YouTube video links as work items under the My Work section title 'My Work' and render them as embedded videos.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Add provided YouTube video links to the \"My Work\" section under the title \"My Work\"",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "projectName": "Fix 'Failed to load work items' and ensure provided YouTube videos render in My Work section",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

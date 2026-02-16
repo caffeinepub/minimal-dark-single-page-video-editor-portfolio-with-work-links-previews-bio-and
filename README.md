@@ -1,2 +1,3 @@
-# minimal-dark-single-page-video-editor-portfolio-with-work-links-previews-bio-and
-Exported from Caffeine project: Minimal dark single-page video editor portfolio with work links, previews, bio, and contact info
+## 
+
+To run app build and run docker image: `docker build -t app . docker run -it --network host app`

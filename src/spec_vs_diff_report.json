@@ -1,0 +1,29 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-16T12:54:31.377Z",
+  "summary": "REQ-1 appears implemented on the frontend by always returning a non-empty seeded fallback list for work items and logging backend fetch errors to the console, preventing an error-only UI state. REQ-2 embedding support for YouTube (including Shorts) and external-link behavior is implemented at the component/URL-parsing level, but the diff does not provide evidence that the specific user-provided YouTube URLs were actually added as work items (e.g., in the seeded list).",
+  "missing_requirements": [
+    {
+      "id": "REQ-2",
+      "requirement": "Add the user-provided YouTube video links as work items under the My Work section title 'My Work' and render them as embedded videos.",
+      "reason": "While YouTube/Shorts URL detection and embedding infrastructure is present, the diff does not show where the specific provided URLs are inserted as work items (e.g., the contents of SEEDED_WORK_ITEMS / seedWorkItems). Without that evidence, it cannot be verified that those exact five URLs will appear in the My Work section.",
+      "evidence": [
+        "frontend/src/hooks/useWorkItems.ts (references SEEDED_WORK_ITEMS but does not show its contents)",
+        "frontend/src/components/work/WorkCard.tsx",
+        "frontend/src/lib/videoProviders.ts"
+      ]
+    }
+  ],
+  "hallucinated_features": [],
+  "confidence": 0.66,
+  "changed_files": [
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/src/components/portfolio/WorkSection.tsx",
+    "frontend/src/components/work/WorkCard.tsx",
+    "frontend/src/hooks/useWorkItems.ts",
+    "frontend/src/lib/videoProviders.ts",
+    "project_state.json"
+  ]
+}

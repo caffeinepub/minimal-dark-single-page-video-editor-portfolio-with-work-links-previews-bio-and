@@ -1,0 +1,54 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Fix My Work loading fallback and ensure provided YouTube videos embed correctly",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Prevent My Work from getting stuck in a 'Failed to load work items' state by ensuring seeded/default work items render even when backend work-item loading fails, while still logging the underlying error for debugging.",
+      "acceptanceCriteria": [
+        "When loading the portfolio page as an anonymous user, the My Work section does not show the 'Failed to load work items' state under normal conditions.",
+        "If the backend work-items query fails for any reason, the frontend still renders a non-empty fallback list (seeded/default work items) instead of showing only an error state.",
+        "The underlying error is still logged to the browser console with enough detail to debug (e.g., includes the caught error object/message)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useWorkItems.ts",
+          "operation": "modify",
+          "description": "Make work-item fetching resilient: always return a non-empty merged list that includes SEEDED_WORK_ITEMS when the actor is unavailable or when fetching backend work items throws. Catch and console.error the caught error object/message (with context that it occurred while loading work items), then fall back to seeded items rather than surfacing a react-query error state."
+        },
+        {
+          "path": "frontend/src/components/portfolio/WorkSection.tsx",
+          "operation": "modify",
+          "description": "Adjust rendering logic so that backend-load issues do not result in only an error UI. Prefer rendering the returned work items list (which will include seeded fallback items) and avoid showing the 'Failed to load work items' empty error state for the main portfolio view. If an error state is still possible, log details to console and still render a fallback WorkGrid rather than a blocking error message."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Add the user-provided YouTube links as work items under 'My Work' and render them as embedded YouTube videos (including Shorts), with an external-link control that opens the original URL in a new tab.",
+      "acceptanceCriteria": [
+        "The My Work section displays embedded videos for each of these URLs: https://youtube.com/shorts/ray6GXDMXug?feature=share , https://youtube.com/shorts/v604ax9a_Xs?feature=share , https://youtube.com/shorts/MeIGa2QyRZY?feature=share , https://youtube.com/shorts/A2TwkU0DDSA?feature=share , https://youtu.be/YfkEA9G75YE .",
+        "Each work card shows the title text 'My Work' and an embedded YouTube player (iframe) for supported YouTube URLs, including Shorts links.",
+        "Clicking the external-link icon (or link) opens the original YouTube URL in a new tab."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/lib/seedWorkItems.ts",
+          "operation": "modify",
+          "description": "Ensure the seeded/default work items include exactly the provided YouTube URLs as video items (title 'My Work', isVideo true), so they appear in the My Work section even without backend data."
+        },
+        {
+          "path": "frontend/src/lib/videoProviders.ts",
+          "operation": "modify",
+          "description": "Harden YouTube URL parsing so Shorts links and youtu.be short links reliably produce a valid embedUrl (e.g., correctly extracting the videoId even with extra query params or trailing path segments). Keep provider support limited to the existing YouTube/Vimeo detection."
+        },
+        {
+          "path": "frontend/src/components/work/WorkCard.tsx",
+          "operation": "modify",
+          "description": "Confirm the external-link icon/link uses target=\"_blank\" with rel=\"noopener noreferrer\" and that video items render the embedded player for supported YouTube URLs (including Shorts). If needed, ensure the embed rendering path is used whenever detectVideoProvider(url).supported is true."
+        }
+      ]
+    }
+  ]
+}

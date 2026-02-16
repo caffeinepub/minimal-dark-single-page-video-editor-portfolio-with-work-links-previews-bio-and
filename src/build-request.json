@@ -1,0 +1,62 @@
+{
+  "kind": "build_request",
+  "title": "Fix 'Failed to load work items' and ensure provided YouTube videos render in My Work section",
+  "priority": "high",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Fix the 'Failed to load work items' error so the My Work section can display work videos reliably.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-4",
+          "msg-6",
+          "msg-7",
+          "msg-12"
+        ],
+        "quotes": [
+          "check the error why in my work section videos are not showing",
+          "its showing failed to load work items",
+          "from the aap we are building"
+        ]
+      },
+      "acceptanceCriteria": [
+        "When loading the portfolio page as an anonymous user, the My Work section does not show the 'Failed to load work items' state under normal conditions.",
+        "If the backend work-items query fails for any reason, the frontend still renders a non-empty fallback list (seeded/default work items) instead of showing only an error state.",
+        "The underlying error is still logged to the browser console with enough detail to debug (e.g., includes the caught error object/message)."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Add the user-provided YouTube video links as work items under the My Work section title 'My Work' and render them as embedded videos.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-10",
+          "msg-14"
+        ],
+        "quotes": [
+          "i am again providing ou the link of the videos which should be added in my work section under the title my work",
+          "build"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The My Work section displays embedded videos for each of these URLs: https://youtube.com/shorts/ray6GXDMXug?feature=share , https://youtube.com/shorts/v604ax9a_Xs?feature=share , https://youtube.com/shorts/MeIGa2QyRZY?feature=share , https://youtube.com/shorts/A2TwkU0DDSA?feature=share , https://youtu.be/YfkEA9G75YE .",
+        "Each work card shows the title text 'My Work' and an embedded YouTube player (iframe) for supported YouTube URLs, including Shorts links.",
+        "Clicking the external-link icon (or link) opens the original YouTube URL in a new tab."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not edit files under frontend/immutablePaths (including frontend/src/hooks/useActor.ts and frontend/src/hooks/useInternetIdentity.ts(x)).",
+    "Backend must remain a single Motoko actor in backend/main.mo."
+  ],
+  "nonGoals": [
+    "Adding new video providers beyond the existing YouTube/Vimeo detection.",
+    "Introducing third-party auth providers or non-Internet-Computer backend services."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

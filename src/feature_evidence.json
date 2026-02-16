@@ -1,0 +1,45 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-fix-the-failed-to-load-work-items-error-so-the-my-work-section-can-display-work-videos-reliably",
+      "featureTitle": "Fix the 'Failed to load work items' error so the My Work section can display work videos reliably.",
+      "files": [
+        "frontend/src/components/portfolio/WorkSection.tsx",
+        "frontend/src/hooks/useWorkItems.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-the-user-provided-youtube-video-links-as-work-items-under-the-my-work-section-title-my-work-and-render-them-as-embedded-videos",
+      "featureTitle": "Add the user-provided YouTube video links as work items under the My Work section title 'My Work' and render them as embedded videos.",
+      "files": [
+        "frontend/src/components/work/WorkCard.tsx",
+        "frontend/src/lib/videoProviders.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    }
+  ]
+}
